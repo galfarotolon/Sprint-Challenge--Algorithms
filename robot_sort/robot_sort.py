@@ -97,7 +97,79 @@ class SortingRobot:
         Sort the robot's list.
         """
         # Fill this out
-        pass
+
+        #plan: 
+        # Use bubble sort like during the week, compares two items (item in the hand and item in front of robot)
+        # and swaps the largest to right until it traverses the whole list
+        # and reaches the end. Then sort the second biggest
+        # number and so on until the list has been completely sorted
+
+        # swaps occurred is translated into light on or off
+        # when the light stops turning on then it means that no more swaps occurred
+        # and the list is completely sorted
+        
+
+        while True:
+            # turn off light immediately upon entering the loop
+            self.set_light_off()
+
+            
+        # move right until the end of the list
+
+            while self.can_move_right():
+                # pick up item and compare with the next
+                self.swap_item()
+                self.move_right()
+
+              # now do a comparison between both items
+    #         # if the item is larger swap it,
+
+                if self.compare_item() == 1:
+                    self.swap_item()
+
+
+                self.move_left()
+                self.swap_item()
+                # after swapping the items in their respective order,
+                # compare the next set of items by moving to 
+                # the right again and re entering loop
+                self.move_right()
+
+
+        # The same process as above is repeated, chaning 
+        # right with left values (reverse) 
+
+            while self.can_move_left():
+                # pick up item and compare with the next
+                self.swap_item()
+                self.move_left()
+    
+            # now do a comparison between both items
+            # if the item is larger swap it,
+
+                if self.compare_item() == -1:
+                    self.swap_item()
+
+                    # turn the light back on once the last
+                    # comparison has been made, to 
+                    # indicate that another sort must occur
+                    self.set_light_on()
+
+
+                self.move_right()
+                self.swap_item()
+                # after swapping the items in their respective order,
+                # compare the next set of items by moving to 
+                # the right again and re entering loop
+                self.move_left()
+        
+            # exit the loop once the light does not turn on 
+            # during the last iteration of the loop
+            # since this means all the items have been swapped and
+            # sorted in the correct order
+            if self.light_is_on() is False:
+                return
+
 
 
 if __name__ == "__main__":
